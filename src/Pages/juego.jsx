@@ -12,19 +12,22 @@ class Juego extends React.Component {
             puntaje: 0,
             orden: [],
             cont: 0,
-            pos: 0
+            pos: 0,
+            fondo:""
         }
     }
     componentWillMount = () => {
         this.randome();
     }
     randome = () => {
+        let fondo = "fondo"+Math.floor(Math.random() * 19);
         let pos = Math.floor(Math.random() * this.state.preguntas.length);
         let obj = this.state.preguntas;
         this.state.preguntaact = this.state.preguntas[pos];
         this.state.pos = pos;
         obj.splice(this.state.pos, 1);
-        this.state.preguntas = obj
+        this.state.preguntas = obj;
+        this.state.fondo = fondo;
     }
     opciones = () => {
         let opciones = [false,
@@ -46,7 +49,7 @@ class Juego extends React.Component {
             opciones[pregunta] = true;
         }
         this.state.orden = orden;
-
+        
     }
     evaluar = (x) => {
         let puny = this.state.puntaje;
@@ -117,7 +120,7 @@ class Juego extends React.Component {
     render() {
         return (
             <>
-                <div className="juegoF">
+                <div className={"juegoF "+this.state.fondo}>
                     {this.finalizar()}
                 </div>
                 <footer className="footer">

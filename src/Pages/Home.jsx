@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Home.css';
 import { preguntas } from '../Utiles/mocks/preguntas';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -18,9 +18,6 @@ class Home extends React.Component {
             cantp: 0,
             bool: false
         }
-    }
-    componentDidUpdate() {
-        console.log(this.state.preguntas);
     }
     check = async (x) => {
         let auxiliar = this.state.checks;

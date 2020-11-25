@@ -3,7 +3,6 @@
     width: 100%;
     display: flex;
     flex-flow: column;
-    background-image: url("../images/fondo.png");
     background-size: 100% auto;
     justify-content: space-around;
     text-align: center;
@@ -48,7 +47,63 @@
     border-radius: 50%;
     background-color: rgb(256, 256, 256, 0.6);
 }
-
+.fondo0{
+    background-image: url("../images/fondo0.png");
+}
+.fondo1{
+    background-image: url("../images/fondo1.png");
+}
+.fondo2{
+    background-image: url("../images/fondo2.png");
+}
+.fondo3{
+    background-image: url("../images/fondo3.png");
+}
+.fondo4{
+    background-image: url("../images/fondo4.png");
+}
+.fondo5{
+    background-image: url("../images/fondo5.png");
+}
+.fondo6{
+    background-image: url("../images/fondo6.png");
+}
+.fondo7{
+    background-image: url("../images/fondo7.png");
+}
+.fondo8{
+    background-image: url("../images/fondo8.png");
+}
+.fondo9{
+    background-image: url("../images/fondo9.png");
+}
+.fondo10{
+    background-image: url("../images/fondo10.png");
+}
+.fondo11{
+    background-image: url("../images/fondo11.png");
+}
+.fondo12{
+    background-image: url("../images/fondo12.png");
+}
+.fondo13{
+    background-image: url("../images/fondo13.png");
+}
+.fondo14{
+    background-image: url("../images/fondo14.png");
+}
+.fondo15{
+    background-image: url("../images/fondo15.png");
+}
+.fondo16{
+    background-image: url("../images/fondo16.png");
+}
+.fondo17{
+    background-image: url("../images/fondo17.png");
+}
+.fondo18{
+    background-image: url("../images/fondo18.png");
+}
 .logo {
     width: 13vw;
     padding: 3vw;
