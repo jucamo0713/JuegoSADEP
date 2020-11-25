@@ -124,7 +124,7 @@ export const preguntas =[{
 	categoria:0,
 	respuesta:"Según el Dane 102.203 habitantes",
 	opcion1:"Según el Dane 112.203 habitantes",
-	opcion2:"Según el Dane 114.203 habitantes"
+	opcion2:"Según el Dane 114.203 habitantes",
 	opcion3:"Según el Dane 105.203 habitantes"
 },{
 	id:16,
