@@ -73,7 +73,7 @@ class Juego extends React.Component {
                 <>
                     <div className="cont_pregu">
                         <div className="fimag">
-                            <img className="logo" src={"/images/imagen" + this.state.preguntaact.categoria + ".png"} />
+                            <img className="logo" src={"./images/Imagen" + this.state.preguntaact.categoria + ".png"} />
                         </div>
                         <h1 className="pregunta">{this.state.preguntaact.pregunta}</h1>
                     </div>
