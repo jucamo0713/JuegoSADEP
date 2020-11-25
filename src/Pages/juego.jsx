@@ -1,113 +1,131 @@
 import React from 'react';
-import '../styles/Home.css';
-import {Link, withRouter} from 'react-router-dom';
+import '../styles/Juego.css';
+import { Link, withRouter } from 'react-router-dom';
+import { preguntas } from '../Utiles/mocks/preguntas';
 class Juego extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            preguntas:this.props.location.state.preguntas,
-            cant:this.props.location.state.cantidad,
-            preguntaact:{}, 
-            puntaje:0, 
-            orden: [], 
-            cont:0
-         }
+        this.state = {
+            preguntas: this.props.location.state.preguntas,
+            cant: this.props.location.state.cantidad,
+            preguntaact: {},
+            puntaje: 0,
+            orden: [],
+            cont: 0,
+            pos: 0
+        }
     }
-    componentWillMount=()=>{     
-        console.log(this.props.location.state.preguntas);     
+    componentWillMount = () => {
         this.randome();
     }
-    componentDidUpdate=()=>{
-        console.log(this.props.location.state.preguntas);
-        this.randome();
+    randome = () => {
+        let pos = Math.floor(Math.random() * this.state.preguntas.length);
+        let obj = this.state.preguntas;
+        this.state.preguntaact = this.state.preguntas[pos];
+        this.state.pos = pos;
+        obj.splice(this.state.pos, 1);
+        this.state.preguntas = obj
     }
-    randome=()=>{
-        let pos= Math.floor( Math.random() * this.props.location.state.preguntas.length);
-        let esom=this.props.location.state.preguntas;        
-        console.log(esom);
-        this.state.preguntaact=this.state.preguntas[pos];
-        console.log(this.state.preguntas);
-        this.props.location.state.preguntas.splice(pos,pos+1);
-        console.log(this.props.location.state.preguntas);
-    }
-    opciones=()=>{
-        let opciones=[false,
+    opciones = () => {
+        let opciones = [false,
             false,
             false,
             false];
-        let orden=[];
-        while(!opciones[0]||!opciones[1]||!opciones[2]||!opciones[3]){
-            let pregunta= Math.floor( Math.random() * 4);
-                if(pregunta==0&&!opciones[0]){
-                    orden.push(pregunta);
-                } else if(pregunta==1&&!opciones[1]){
-                    orden.push(pregunta);
-                }else if(pregunta==2&&!opciones[2]){
-                    orden.push(pregunta);
-                }else if(pregunta==3&&!opciones[3]){
-                    orden.push(pregunta);
-                }
-            opciones[pregunta]=true;
+        let orden = [];
+        while (!opciones[0] || !opciones[1] || !opciones[2] || !opciones[3]) {
+            let pregunta = Math.floor(Math.random() * 4);
+            if (pregunta == 0 && !opciones[0]) {
+                orden.push(pregunta);
+            } else if (pregunta == 1 && !opciones[1]) {
+                orden.push(pregunta);
+            } else if (pregunta == 2 && !opciones[2]) {
+                orden.push(pregunta);
+            } else if (pregunta == 3 && !opciones[3]) {
+                orden.push(pregunta);
+            }
+            opciones[pregunta] = true;
         }
-        this.state.orden=orden;
+        this.state.orden = orden;
 
     }
-    evaluar=(x)=>{
-        let puny=this.state.puntaje;
-        let cont=this.state.cont;
-        let elemento=document.getElementById("boton"+x).value;
-        if(elemento == this.state.preguntaact.respuesta){
+    evaluar = (x) => {
+        let puny = this.state.puntaje;
+        let cont = this.state.cont;
+        let elemento = document.getElementById("boton" + x).value;
+        if (elemento == this.state.preguntaact.respuesta) {
             puny++;
         }
         cont++;
+        this.randome();
         this.setState({
-            puntaje:puny,
-            cont:cont
+            puntaje: puny,
+            cont: cont,
         });
     }
-    finalizar=()=>{
-        if(this.state.cont < this.state.cant){
+
+
+    finalizar = () => {
+        if (this.state.cont < this.state.cant) {
             return (
                 <>
-                    <input type="button" value={this.state.puntaje}/>
-                    <p>{this.state.preguntaact.pregunta}</p>
+                    <div className="cont_pregu">
+                        <div className="fimag">
+                            <img className="logo" src={"./images/imagen" + this.state.preguntaact.categoria + ".png"} />
+                        </div>
+                        <h1 className="pregunta">{this.state.preguntaact.pregunta}</h1>
+                    </div>
                     {this.opciones()}
-                    {this.state.orden.map((Esito, Index)=>{
-                        if(Esito==0){
-                            return(
-                                <>
-                                    <input type="button" id={"boton"+Index} onClick={()=>{this.evaluar(Index)}} value={this.state.preguntaact.respuesta}/>
-                                </>);
-                        } else if(Esito==1){
-                            return(
-                                <>
-                                    <input type="button" id={"boton"+Index} onClick={()=>{this.evaluar(Index)}} value={this.state.preguntaact.opcion1}/>
-                                </>);
-                        }else if(Esito==2){
-                            return(
-                                <>
-                                    <input type="button" id={"boton"+Index} onClick={()=>{this.evaluar(Index)}} value={this.state.preguntaact.opcion2}/>
-                                </>);
-                        }else if(Esito==3){
-                            return(
-                                <>
-                                    <input type="button" id={"boton"+Index} onClick={()=>{this.evaluar(Index)}} value={this.state.preguntaact.opcion3}/>
-                                </>);
-                        }
-                    })}
+                    <div className="opcionesJ">
+                        {this.state.orden.map((Esito, Index) => {
+                            if (Esito == 0) {
+                                return (
+                                    <>
+                                        <button value={this.state.preguntaact.respuesta}className="botonJ" id={"boton" + Index} onClick={() => { this.evaluar(Index) }}>{this.state.preguntaact.respuesta}</button>
+                                    </>);
+                            } else if (Esito == 1) {
+                                return (
+                                    <>
+                                        <button value={this.state.preguntaact.opcion1}className="botonJ" id={"boton" + Index} onClick={() => { this.evaluar(Index) }} >{this.state.preguntaact.opcion1}</button>
+                                    </>);
+                            } else if (Esito == 2) {
+                                return (
+                                    <>
+                                        <button value={this.state.preguntaact.opcion2}className="botonJ" id={"boton" + Index} onClick={() => { this.evaluar(Index) }} >{this.state.preguntaact.opcion2}</button>
+                                    </>);
+                            } else if (Esito == 3) {
+                                return (
+                                    <>
+                                        <button value={this.state.preguntaact.opcion3}className="botonJ" id={"boton" + Index} onClick={() => { this.evaluar(Index) }} >{this.state.preguntaact.opcion3}</button>
+                                    </>);
+                            }
+                        })}
+                    </div>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    <h1 className="Acabar">Acabaste <br /> Acertaste {this.state.puntaje} preguntas</h1>
+                    <h1 className="Acabar">Tu calificacion es de: {(Math.round((this.state.puntaje / this.state.cant) * 50)) / 10}</h1>
+                    <Link to="/">
+                        <input type="button" value="Volver" className="botonV" />
+                    </Link>
                 </>
             );
         }
     }
-    render() { 
-        return ( 
-            <>                
+    render() {
+        return (
+            <>
                 <div className="juegoF">
-                    {this.finalizar()}                    
+                    {this.finalizar()}
                 </div>
+                <footer className="footer">
+                    Trivia San Antonio de Prado-Juan Camilo Montoya
+                </footer>
             </>
-         );
+        );
     }
 }
- 
+
 export default withRouter(Juego);
